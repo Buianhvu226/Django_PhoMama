@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="shortcut icon" href="/static/asset/favicon.png" type="">
+    <title>Pho Momma</title>
+    <link rel="stylesheet" type="text/css" href="/static/asset/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+    <link href="/static/asset/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="/static/asset/css/style.css" rel="stylesheet" />
+    <link href="/static/asset/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/asset/css/base.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/static/asset/css/home-page.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/static/asset/css/layout-login.css" asp-append-version="true" />
+</head>
+<body>
+<div class="login-wrapper">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="switch-btn"></div>
+            <div class="toggle-btn">
+                <button type="button" class="button-box__toggle-btn" id="login-state" onclick="login()">Đăng nhập</button>
+                <button type="button" class="button-box__toggle-btn" id="register-state" onclick="register()">Đăng ký</button>
+            </div>
+        </div>        
+
+		<form method="post" action="{% url 'home:login_view' %}" class="input-group" style="margin-top: 40px; left: 50px;">
+			{% csrf_token %}
+			{% if messages %}
+				{% for message in messages %}
+					<div class="unsuccessful-message">{{ message }}</div>
+				{% endfor %}
+			{% endif %}
+			<div class="input-item">
+				<i class="fa-solid fa-user"></i>
+				<input name="Email" type="text" class="input-field" placeholder="Email" required pattern="^[a-zA-Z0-9](\.?[a-zA-Z0-9]){4,}@gmail\.com$" title="Vui lòng nhập đúng email!">
+			</div>
+			<div class="input-item">
+				<i class="fa-solid fa-key"></i>
+				<input name="Password" type="password" class="input-field" placeholder="Mật khẩu" required>
+			</div>
+			<button type="submit" class="submit-btn">Đăng nhập</button>
+			<a href="#" class="input-group__forget">Quên mật khẩu</a>
+		</form>
+				
+
+        <form method="post" id="register" class="input-group RegisterAcc">
+            {% csrf_token %}
+            <div class="unsuccessful-message" id="error"></div>         
+            <div class="input-item">
+                <i class="fa-solid fa-user"></i>
+                <input name="name" class="input-field" placeholder="Nhập Họ và tên" required>                
+            </div>           
+            <div class="input-item">
+                <i class="fa-solid fa-envelope"></i>
+                <input name="email" class="input-field" placeholder="Nhập Email" required>               
+            </div>
+            <div class="input-item">
+                <i class="fa-solid fa-phone"></i>
+                <input name="phone" class="input-field" placeholder="Nhập số điện thoại" required>                
+            </div>
+            <div class="input-item">
+                <i class="fa-solid fa-key"></i>
+                <input name="pass" class="input-field" placeholder="Nhập mật khẩu" required>               
+            </div>  
+            <div class="input-item">
+                <i class="fa-solid fa-square-check"></i>
+                <input name="confirmpassRG" class="input-field" placeholder="Nhập lại mật khẩu" required>
+            </div>
+            <button type="submit" class="submit-btn submit-btn-register">Đăng ký</button>
+        </form>
+
+        <a href="#" class="home-link"><i class="fa-solid fa-chevron-left"></i>Về trang chủ</a>
+    </div>
+</div>
+
+<script src="/static/asset/js/login-register.js"></script>
+<script src="/static/lib/jquery/dist/jquery.min.js"></script>
+<script>
+
+</script>
+</body>
+</html>

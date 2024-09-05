@@ -1,0 +1,365 @@
+.product {
+    background-color: var(--div-color);
+    border-radius: 8px;
+    padding: 40px 0;
+    margin: 0;
+    margin-bottom: 30px;
+    justify-content: space-around;
+}
+
+.list-imgs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-img {
+    width: 90%;
+}
+
+    .main-img img {
+        width: 100%;
+        border: 2px solid #c6c6c6;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,.5);
+    }
+
+.list-more-imgs {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 10px;
+}
+
+.more-img {
+    width: 24%;
+}
+
+    .more-img img {
+        width: 100%;
+        border: 1px solid #c6c6c6;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+    }
+
+        .more-img img:hover {
+            background-color: rgb(221, 208, 209);
+        }
+
+    .more-img:hover img {
+        transform: scale(1.2);
+    }
+/* product-infor */
+.product-infor {
+    width: 90%;
+    font-size: 1.8rem;
+    position: relative;
+}
+
+.product-detail {
+    padding-bottom: 10px;
+    position: absolute;
+    left: 0;
+    border-bottom: 2px solid #c6c6c6;
+    right: 70px;
+}
+
+.product-name {
+    text-transform: capitalize;
+}
+.product-description {
+    font-style: italic;
+}
+.product-category-name {
+    margin-left: 10px;
+    color: var(--black-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .product-category-name:hover {
+        color: var(--main-color);
+        opacity: 0.6;
+        text-decoration: none;
+    }
+
+.numbersof-rating {
+    margin-left: 5px;
+}
+
+.product-cost {
+    font-size: 2rem;
+}
+
+.product-money {
+    margin-left: 60px;
+    font-weight: 600;
+    color: var(--main-color);
+}
+
+.rating-edit label {
+    width: 18px !important;
+}
+.numbersof-rating {
+    margin-left: 15px;
+    opacity: 0.7;
+}
+.product-shopping {
+    position: absolute;
+    bottom: 10px;
+    right: 70px;
+    left: 0;
+}
+
+.product-cart .quantity {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.input-group__detail {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    height: 36px;
+    border: 2px solid #c6c6c6;
+    border-radius: 8px;
+    margin-left: 40px;
+}
+.input-group__detail .minus-plus-button {
+    font-size: 2rem;
+    height: 100%;
+    flex: 1;
+    text-align: center;
+    outline: none;
+    border: none;
+    background: var(--div-color);
+}
+.minus-detail {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.plus-detail {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.minus-plus-button {
+    width: 2.2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    user-select: none;
+}
+
+    .minus-plus-button:active {
+        background-color: #CCC;
+        width: 2.3rem;
+    }
+
+.input-group__detail .minus-plus-button:active {
+    background-color: #CCC;
+}
+.input-group__detail .input-field {
+    height: 100%;
+    flex: 2;
+    outline: none;
+    width: 60%;
+    padding: 6px 10px;
+    border: none;
+    border-left: 1px solid #c6c6c6;
+    border-right: 1px solid #c6c6c6;
+    font-size: 1.4rem;
+    text-align: center;
+    opacity: 0.8;
+    background: transparent;
+}
+
+.submit-btn__detail {
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-cart-icon {
+    margin-right: 10px;
+}
+
+.review {
+    font-size: 1.6rem;
+    margin-bottom: 50px;
+}
+
+.review-label {
+    width: 130px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--white-color);
+    background-color: var(--main-color);
+    border-radius: 5px;
+    padding: 5px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+
+.review-item {
+    border: 1px solid #c6c6c6;
+    border-radius: 6px;
+    padding: 15px 40px;
+    background-color: transparent;
+    display: flex;
+}
+
+    .review-item .reviewer {
+        margin-left: 30px;
+    }
+
+        .review-item .reviewer > p,
+        .review-item .reviewer > div {
+            margin-bottom: 5px;
+        }
+
+    .review-item .reviewer-avt {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .review-item .reviewer-name {
+        font-weight: 500;
+        font-size: 1.8rem;
+    }
+
+
+.rating-review label {
+    margin-right: 5px;
+}
+
+    .rating-review label::before {
+        font-size: 15px;
+    }
+
+/*.review-item .list-reviewer-pics {
+    height: 80px;
+}*/
+
+.list-reviewer-pics .reviewer-pic {
+    width: auto;
+    height: 90px;
+    border-radius: 6px;
+}
+
+.reviewer-descript {
+    word-wrap: break-word;
+}
+
+/* rating */
+
+    .rating input {
+        display: none;
+    }
+
+    .rating label {
+        display: block;
+        cursor: pointer;
+        width: 15px;
+        margin-right: 10px;
+    }
+
+        .rating label:before {
+            content: '\f005';
+            font-family: fontAwesome;
+            position: relative;
+            display: block;
+            font-size: 20px;
+            color: #e0e0e0;
+        }
+
+        .rating label:after {
+            content: '\f005';
+            font-family: fontAwesome;
+            position: absolute;
+            display: block;
+            font-size: 20px;
+            color: #ffff00;
+            top: 0;
+            opacity: 0;
+            transition: .5s;
+            text-shadow: 0 2px 5px rgba(0,0,0,.5);
+        }
+
+        .rating label:hover:after,
+        .rating label:hover ~ label:after,
+        .rating input:checked ~ label:after {
+            opacity: 1;
+        }
+/* End rating */
+
+/* Custom style to set icon size */
+.alert.alert-dismissible {
+    position: absolute;
+    bottom: 30%;
+    right: 70px;
+    left: -49px;
+    padding: 10px 15px;
+    border-radius: 5px
+}
+
+button.btn-close {
+    border: none;
+    background: transparent;
+    position: absolute;
+    right: 10px;
+}
+
+button.btn-close:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+button.btn-close:focus,
+button.btn-close:focus-within{
+    outline: none;
+}
+.alert i {
+    font-size: 1.2em;
+    line-height: 1;
+    margin-right: 5px;
+}
+.fa-solid.fa-xmark {
+    font-size: 2rem;
+}
+
+/* rating */
+.fa.fa-star {
+    color: #f8ce0b;
+}
+.fa.fa-star.fa-star-o {
+    color: #ccc;
+}
+
+.stars-outer {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+    color: #ccc;
+    margin-left: 24px;
+    font-size: 22px;
+    transform: translateY(-5px);
+}
+
+.stars-outer::before {
+  content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #f8ce0b;
+}

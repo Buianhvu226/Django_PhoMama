@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/static/asset/favicon.png" type="" />
+
+    <title>Danh sách Đơn hàng</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- bootstrap core css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/asset/css/bootstrap.css"
+    />
+
+    <!--owl slider stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <!-- nice select  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+      integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+      crossorigin="anonymous"
+    />
+    <!-- font awesome style -->
+    <link href="/static/asset/css/font-awesome.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/asset/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/static/asset/css/responsive.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/base.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/layout-user.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/home-page.css"
+      asp-append-version="true"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/cart.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/payment.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/menu.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-food.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-account.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/change-password.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/my-order.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-order-wait.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-order-done.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/update-info-account.css"
+      asp-append-version="true"
+    />
+  </head>
+<body>
+    <!-- Navbar -->
+    <div class="hero_area" id="home">
+      
+        <!-- header section strats -->
+        <header class="header">
+          <div class="col-10">
+            <nav class="header__navbar">
+              <a asp-page="/User/HomePage" class="logo-link">
+                <img
+                  src="/static/asset/images/logo_black.png"
+                  alt=""
+                  class="logo-brand"
+                />
+              </a>
+  
+              <ul class="header__navbar-list">
+                <li class="header__navbar-item">
+                  <a class="header__navbar--item-link" href="{% url 'home:admin_menu' %}">Trang chủ</a>
+                </li>
+              </ul>
+  
+  
+              <ul class="header__navbar-list header__navbar-list--icon">
+                <li class="header__navbar-item">
+                  <input type="hidden" name="user_id" value="{{ request.session.user_id }}">
+                </li>
+                <li class="header__navbar-item">
+                  {% if request.session.logged_in %}
+                  <div class="header__navbar--item-link dropdown">
+                      <button class="btn-drop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="header__navbar-icon fas fa-user"></i>
+                          <a style="color: red">ADMIN</a>
+                          
+                      </button>
+                      <div class="dropdown-menu">
+                          <a class="dropdown-item" asp-page="/User/Account/DetailAccount">Tài khoản</a>
+                          <a class="dropdown-item" href="{% url 'home:logout' %}">Đăng xuất</a>
+                      </div>
+                  </div>
+                  {% else %}
+                  <a class="header__navbar--item-link" href="{% url 'home:login' %}">
+                      <i class="header__navbar-icon fas fa-user"></i>
+                      Đăng nhập
+                  </a>
+                  {% endif %}
+              </li>            
+              </ul>
+            </nav>
+          </div>
+        </header>
+        <!-- slider section -->
+        
+
+    <!-- Main content -->
+    <div class="container mt-5">
+        <h1 class="mb-4">Danh sách Đơn hàng</h1>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Mã Đơn hàng</th>
+                    <th>Ngày bán</th>
+                    <th>Thời gian giao hàng</th>
+                    <th>Tên Khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Ghi chú</th>
+                    <th>Tiền tạm tính</th>
+                    <th>Phí vận chuyển</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Số nhà</th>
+                    <th>Phường</th>
+                    <th>Nhân viên Bếp</th>
+                    <th>Nhân viên Giao hàng</th>
+                    <th>Khách hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.Order_id }}</td>
+                        <td>{{ order.Sale_date }}</td>
+                        <td>{{ order.Arrive_time }}</td>
+                        <td>{{ order.Customer_name }}</td>
+                        <td>{{ order.Phone_number }}</td>
+                        <td>{{ order.Note }}</td>
+                        <td>{{ order.Temp_money }}</td>
+                        <td>{{ order.Shipping_money }}</td>
+                        <td>{{ order.Total_money }}</td>
+                        <td>{{ order.Status_odr }}</td>
+                        <td>{{ order.House_number }}</td>
+                        <td>{{ order.Ward }}</td>
+                        <td>{{ order.Chef_staff }}</td>
+                        <td>{{ order.Shipper_staff }}</td>
+                        <td>{{ order.Customer }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

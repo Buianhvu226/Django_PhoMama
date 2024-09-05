@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="/static/asset/css/base.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<link rel="stylesheet" href="/static/asset/css/paging.css" />
+
+{% if page_obj.has_other_pages %}
+    <div class="page-pagination">
+        <ul class="pagination">
+            <!-- Previous page link -->
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <i class="fas fa-angle-double-left"  style="color: #008080"></i>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!-- Numbered page links -->
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#" style="background-color: var(--main-color); color: var(--white-color)">
+                            {{ num }} <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                {% elif num > page_obj.number|add:"-5" and num < page_obj.number|add:"5" %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Next page link -->
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        <i class="fas fa-angle-double-right"  style="color: #008080"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <i class="fas fa-angle-double-right style="color: #008080""></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

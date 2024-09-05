@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/static/asset/favicon.png" type="" />
+
+    <title>Pho Momma</title>
+
+    <!-- bootstrap core css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/asset/css/bootstrap.css"
+    />
+
+    <!--owl slider stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <!-- nice select  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+      integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+      crossorigin="anonymous"
+    />
+    <!-- font awesome style -->
+    <link href="/static/asset/css/font-awesome.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/asset/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/static/asset/css/responsive.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/base.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/layout-user.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/home-page.css"
+      asp-append-version="true"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/cart.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/payment.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/menu.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-food.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-account.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/change-password.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/my-order.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-order-wait.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/detail-order-done.css"
+      asp-append-version="true"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/asset/css/update-info-account.css"
+      asp-append-version="true"
+    />
+  </head>
+
+  <body>
+    <div class="hero_area" id="home">
+      
+      <!-- header section strats -->
+      <header class="header">
+        <div class="col-10">
+          <nav class="header__navbar">
+            <a asp-page="/User/HomePage" class="logo-link">
+              <img
+                src="/static/asset/images/logo_black.png"
+                alt=""
+                class="logo-brand"
+              />
+            </a>
+
+            <ul class="header__navbar-list">
+              <li class="header__navbar-item">
+                <a class="header__navbar--item-link" href="{% url 'home:order_admin' %}">Danh sách các đơn đặt</a>
+              </li>
+            </ul>
+
+
+            <ul class="header__navbar-list header__navbar-list--icon">
+              <li class="header__navbar-item">
+                <input type="hidden" name="user_id" value="{{ request.session.user_id }}">
+              </li>
+              <li class="header__navbar-item">
+                {% if request.session.logged_in %}
+                <div class="header__navbar--item-link dropdown">
+                    <button class="btn-drop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="header__navbar-icon fas fa-user"></i>
+                        <a style="color: red">ADMIN</a>
+                        
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-page="/User/Account/DetailAccount">Tài khoản</a>
+                        <a class="dropdown-item" href="{% url 'home:logout' %}">Đăng xuất</a>
+                    </div>
+                </div>
+                {% else %}
+                <a class="header__navbar--item-link" href="{% url 'home:login' %}">
+                    <i class="header__navbar-icon fas fa-user"></i>
+                    Đăng nhập
+                </a>
+                {% endif %}
+            </li>            
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <!-- slider section -->
+      
+    {% block content %} {% endblock content %}
+    <footer class="footer border-top text-muted">
+      <div class="col-10 jtf-center">
+        <div class="row d-flex justify-content-between footer-division">
+          <div class="text__footer col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <p class="footer__heading">VỀ CHÚNG TÔI</p>
+            <p class="footer__heading_content">
+              Là một trang web cửa hàng thức ăn nhanh tạo bằng Django, được thực hiện bởi Thế Đạt và Anh Vũ.
+            </p>
+            <div class="d-flex logo_opening">
+              <img
+                class="logo_opening-image"
+                src="/static/asset/images/logo_watch.png"
+                alt=""
+              />
+              <div class="footer_opening_text">
+                <br>
+                <p>Sản phẩm Django nhóm 10</p>
+                <br>
+              </div>
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-center align-items-center col-xs-6 col-sm-6 col-md-6 col-lg-6"
+          >
+            <div class="logo__footer justify-content align-items">
+              <a asp-page="/Index" class="logo-link">
+                <img
+                  src="/static/asset/images/logo_black.png"
+                  alt=""
+                  class="footer__logo-brand"
+                />
+              </a>
+              <div
+                class="footer__slogan d-flex align-items-center justify-content-center text-white-50"
+              >
+                <p class="footer__power-slogan">Powered by</p>
+                <a class="nav-link" asp-page="/Index">The Dat-Anh Vu</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- end block Menu -->
+
+    <!-- footer section -->
+
+    <!-- footer section -->
+
+    <!-- jQery -->
+    <script src="/static/asset/js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap js -->
+    <script src="/static/asset/js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  </body>
+</html>

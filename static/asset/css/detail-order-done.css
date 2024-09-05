@@ -1,0 +1,360 @@
+/*.body__manage-account {
+    background-color: var(--div-color);
+    border-radius: 8px;
+    padding: 30px 50px;
+    box-shadow: 3px 2px 5px 3px rgba(0,0,0,.15);
+}
+
+.body__manage-account-detail {
+    background-color: var(--div-color);
+    border-radius: 8px;
+    padding: 30px 50px;
+    box-shadow: 3px 2px 5px 3px rgba(0,0,0,.15);
+    margin-left: 2%;
+    margin-bottom: 3%;
+}
+
+.body-title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.lb-title {
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+.btn-xacnhan {
+    background-color: var(--main-color);
+    color: var(--white-color);
+    border: none;
+    outline: none;
+    width: 200px;
+    height: 25px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 20px;
+    margin-left: 40px;
+    text-align: center;
+    line-height: 10px;
+}*/
+/*
+.body-title-detail {
+    display: block;
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.body_detail {
+    background-color: var(--div-color);
+    border-radius: 8px;
+    height: 180px;
+    margin-left: 4%;
+    margin-top: 1%;
+    box-shadow: 3px 2px 5px 3px rgba(0,0,0,.15);
+}
+
+.body_detail-rw {
+    background-color: var(--div-color);
+    border-radius: 8px;
+    height: 180px;
+    margin-left: 2%;
+    margin-top: 1%;
+    box-shadow: 3px 2px 5px 3px rgba(0,0,0,.15);
+}
+
+.body-detail-txt {
+    font-size: 1.6rem;
+}
+
+.body_detail hr {
+    display: block;
+    width: 100%;
+    margin: 0 0 5px 0;
+    background-color: #333;
+}
+
+.body_detail-rw hr {
+    display: block;
+    width: 100%;
+    margin: 0 0 5px 0;
+    background-color: #333;
+}
+*/
+/*.grid__full-width {
+    width: 100%;
+}
+
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+CSS cart.css
+.list-item {
+    margin: 40px 0 40px 3%;
+    font-size: 1.6rem;
+    border-radius: 10px;
+     flex-grow: 1; 
+    color: var(--text-color);
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.cart__name-item {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: capitalize;
+    text-align: left;
+}
+
+    .cart__name-item:hover {
+        color: var(--text-color);
+        text-decoration: none;
+        opacity: 0.8;
+    }
+
+.input-group {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid #c6c6c6;
+    border-radius: 5px;
+}
+
+.input-field {
+    width: 60%;
+    height: 2.6rem;
+    padding: 6px 10px;
+    border: none;
+    border-left: 1px solid #c6c6c6;
+    border-right: 1px solid #c6c6c6;
+    font-size: 1.4rem;
+    text-align: center;
+    opacity: 0.8;
+    background: transparent;
+}
+
+.cart__item-image {
+    margin: 6px 0;
+    border-radius: 6px;
+    width: 26%;
+    height: 26%;
+    margin-right: 10px;
+}
+
+.table i {
+    opacity: 0.8;
+}
+
+    .table i:hover {
+        opacity: 0.6;
+    }*/
+
+/* Total Fee */
+/*.fee-division {
+    width: 35%;
+    font-size: 1.6rem;
+    margin-bottom: 50px;
+    justify-self: right;
+}
+*/
+/*.total-fee-list {
+    margin: 16px 0;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+}*/
+
+/*.fee-detail {
+    border: 1px solid #dee2e6;
+}*/
+
+/*.fee-detail__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+}*/
+/*
+.cancel-order-done {
+    background-color: #e0e0e0;
+    color: var(--white-color);
+    border: none;
+    outline: none !important;
+    width: 49%;
+    height: 5%;
+    padding: 10px;
+    font-size: 1.8rem;
+    border-radius: 5px;
+    margin-left: 3%;
+}
+
+.re-order {
+    background-color: var(--main-color);
+    color: var(--white-color);
+    border: none;
+    outline: none !important;
+    width: 49%;
+    height: 5%;
+    padding: 10px;
+    font-size: 1.8rem;
+    border-radius: 5px;
+    margin-left: 3%;
+}
+
+.btn-cancel-order {
+    display: flex;
+}
+
+ Open modal review*/
+
+ #modal-container-review {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease-in-out;
+}
+
+#modal-container-review.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+#modal-review {
+    background-color: #fff;
+    max-width: 800px;
+    position: relative;
+    top: 0%;
+    margin: auto;
+    border-radius: 8px;
+    transition: all 0.25s ease-in-out;
+}
+
+#modal-container-review.show #modal-review {
+    top: 15%;
+}
+
+#modal-review .modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: var(--main-color);
+    color: white;
+    font-size: 1.8rem;
+    vertical-align: middle;
+    height: 40px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+#modal-review .modal_header p {
+    margin: 0;
+    margin-left: 30px;
+}
+.modal_body {
+    padding: 15px;
+    padding-bottom: 0;
+    margin: 0 30px;
+}
+
+.modal_body h3 {
+    margin-bottom: 10px;
+}
+img.review-img {
+    width: 100px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+.modal_footer {
+    padding: 15px;
+    padding-top: 0;
+    text-align: right;
+}
+
+.modal_footer button {
+    padding: 10px 20px;
+    color: white;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-right: 3%;
+}
+
+.rating-star {
+    display: flex;
+}
+
+.rating {
+    transform: rotateY(180deg);
+    display: flex;
+    margin-left: 10px;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    display: block;
+    cursor: pointer;
+    width: 15px;
+    margin-right: 10px;
+}
+
+.rating label:before {
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 20px;
+    color: #e0e0e0;
+}
+
+.rating label:after {
+    content: '\f005';
+    font-family: fontAwesome;
+    position: absolute;
+    display: block;
+    font-size: 20px;
+    color: #ffff00;
+    top: 0;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after {
+    opacity: 1;
+}
+textarea {
+    border-radius: 4px;
+    font-size: 1.4rem;
+    width: 100%;
+    padding: 5px;
+}
+textarea:focus-visible {
+    outline: none;
+}
+input#myfile {
+    margin-left: 20px;
+}

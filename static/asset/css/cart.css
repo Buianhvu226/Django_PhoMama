@@ -1,0 +1,132 @@
+.menu {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 1.8rem;
+    border-radius: 10px;
+    /* flex-grow: 1; */
+    color: var(--text-color);
+}
+
+.list-item tr {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+    border: none;
+}
+
+.cart__name-item {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 400;
+    text-transform: capitalize;
+    text-align: left;
+}
+
+.cart .cart__name-item:hover {
+        color: var(--main-color);
+        text-decoration: none;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid #c6c6c6;
+    border-radius: 5px;
+}
+
+tr .input-field {
+    width: 59%;
+    height: 2.6rem;
+    padding: 6px 10px;
+    border: none;
+    border-left: 1px solid #c6c6c6;
+    border-right: 1px solid #c6c6c6;
+    font-size: 1.6rem;
+    text-align: center;
+    opacity: 0.8;
+    background: transparent;
+}
+
+.cart__item-image {
+    margin: 6px 0;
+    border-radius: 6px;
+    width: 26%;
+    height: 26%;
+    margin-right: 10px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+}
+.icon-btn:focus, 
+.icon-btn:focus-visible  {
+    border: none;
+    outline: none;
+}
+.table i {
+    opacity: 0.8;
+    font-size: 2rem;
+}
+
+.table i:hover {
+    opacity: 0.6;
+}
+
+/* Total Fee */
+.cart.list-item {
+    margin: 40px auto;
+}
+.cart .fee-division {
+    width: 35%;
+    font-size: 1.8rem;
+    margin-bottom: 50px;
+    padding: 15px;
+    border-radius: 8px;
+    transform: translateX(-15px);
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,.5);
+}
+
+.total-fee-list {
+    margin: 16px 0;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+}
+
+.fee-detail {
+    border: 1px solid #dee2e6;
+}
+
+.fee-detail__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+}
+
+span.fee-detail__item {
+    font-weight: 500;
+    font-size: 1.8rem;
+    justify-content: center;
+}
+
+/* empty cart*/
+.empty-cart {
+    margin: 70px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .empty-cart img {
+        margin: 0 auto;
+    }
+
+.home-link__emptycart {
+    font-size: 1.6rem;
+    width: 30%;
+}

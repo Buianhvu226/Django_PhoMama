@@ -1,0 +1,18 @@
+.body-title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.manage-account__link {
+    font-size: 1.6rem;
+}
+
+.manage-account__input-up {
+    height: 30px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    outline: #F0F0F0;
+    border-color: rgba(52, 44, 44, 0.2);
+    border-radius: 10px;
+}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Orders
+{% endblock %}
+{% block content %}
+
+<div class="breadcrumb-division">
+    <ol class="breadcrumb breadcrumb__edit">
+    </ol>
+</div>
+<div class="body container">
+    <div class="row justify-content-between" style="margin-top: 60px;">
+
+
+        <div class="col pr-0 justify-content-between">
+            {% if orders|length == 0 %}
+            <div class="no-order">
+                <p class="no-order-text">Bạn chưa có đơn hàng nào</p>
+            </div>
+            {% else %}
+            {% for order in orders %}
+            <div class="list-item my-order">
+                <table class="table text-center">
+                    <thead style="background-color: var(--div-color);height: 50px;">
+                        <tr class="table-header">
+                            <th class="cart__table-col col-1" scope="col">Mã</th>
+                            <th class="cart__table-col col-2" scope="col">Người nhận</th>
+                            <th class="cart__table-col col-2" scope="col">Thời gian đặt</th>
+                            <th class="cart__table-col col-2" scope="col">Địa chỉ</th>
+                            <th class="cart__table-col col-2" scope="col">Tổng tiền</th>
+                            <th class="cart__table-col col-2" scope="col">Trạng thái</th>
+                            <th class="cart__table-col col-2" scope="col">Xem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tr-ctn">
+                            <td>
+                                <a class="cart__name-item" href="{% url 'home:detail_order' order.Order_id %}">{{ order.Order_id }}</a>
+                            </td>
+                            <td style="text-align: left;">{{ order.Customer_name }}</td>
+                            <td>{{ order.Sale_date }}</td>
+                            <td style="text-align:left">{{ order.House_number }}</td>
+                            <td class="table-money" style="font-weight: 500; color: var(--admin-color);">{{ order.Total_money }}đ</td>
+                            <td>Đã đặt món</td>
+                            <td>
+                                <a class="cart__name-item" href="{% url 'home:detail_order' order.Order_id %}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/my-order.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,156 @@
+.body {
+    margin-bottom: 5%;
+}
+
+.body__side-bar {
+    border-radius: 5px;
+    padding: 30px 0;
+    height: 300px;
+    background-color: var(--div-color);
+    box-shadow: 1px 1px 8px 0px var(--admin-color);
+}
+
+.side-bar-box {
+    margin: 5% 10% 10% 10%;
+    padding-left: 10px;
+}
+/* account */
+.account {
+    display: flex;
+    margin: 10px 10% 30px;
+    padding: 0 10px;
+}
+
+img.account-avt {
+    width: 40px;
+    height: 40px;
+}
+
+.account-detail {
+    margin-left: 15px;
+    align-self: center;
+}
+
+a.account-name {
+    font-weight: 600;
+    font-style: italic;
+}
+.body__side-bar-item {
+    text-decoration: none;
+    font-size: 1.8rem;
+    list-style: none;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.body__side-bar-item.active {
+    color: var(--main-color);
+    z-index: 2;
+}
+
+.side-bar-box a:hover {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+.side-bar-box a:active {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+.side-bar-filter {
+    border-bottom: 1px solid var(--text-color);
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.body__manage-account {
+    background-color: var(--div-color);
+    border-radius: 8px;
+    padding: 30px 50px;
+    box-shadow: 3px 2px 5px 3px rgba(0,0,0,.15);
+}
+
+.body-title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.manage-account__link {
+    font-size: 1.6rem;
+}
+
+.manage-account__title,
+.manage-account__btn {
+    font-size: 1.8rem;
+}
+
+.manage-account__input {
+    height: 40px;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    outline: #F0F0F0;
+    border-color: rgba(52, 44, 44, 0.2);
+    border-radius: 10px;
+}
+
+.manage-account__btn {
+    background-color: var(--main-color);
+    border: none;
+    outline: none !important;
+    height: 40px;
+    color: var(--white-color);
+    font-weight: 400;
+    border-radius: 2px;
+    margin: auto;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.manage-pass__input {
+    height: 30px;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    outline: #F0F0F0;
+    border-color: rgba(52, 44, 44, 0.2);
+    border-radius: 20px;
+}
+
+.manage-pass__btn {
+    background-color: var(--main-color);
+    border: none;
+    height: 40px;
+    font-size: 1.6rem;
+    color: var(--white-color);
+    font-weight: 400;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.manage-pass__title {
+    font-size: 1.6rem;
+}
+
+.link-forgot-pass {
+    font-size: 15px;
+    color: var(--main-color);
+    margin: 40%;
+}
+
+.link-change-passw {
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+.btn-change-pass a:hover {
+    text-decoration: none;
+    color: var(--white-color);
+    opacity: 0.6;
+}
+
+.btn-change-pass a:active {
+    text-decoration: none;
+    color: var(--white-color);
+}

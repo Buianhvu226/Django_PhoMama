@@ -1,0 +1,243 @@
+.menu {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 1.8rem;
+}
+
+.filter-menu {
+    font-size: 1.8rem;
+    width: 80%;
+    margin: auto;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+    .filter-menu:nth-child(2) {
+        margin-top: 30px;
+    }
+
+    .filter-menu p {
+        width: 100%;
+        text-align: center;
+        font-weight: 500;
+        border-bottom: 1px solid var(--text-color);
+        padding-bottom: 15px;
+    }
+
+a.category-filter-name,
+a.cost-filter-name {
+    border: none;
+    color: var(--text-color);
+    margin: 5px 0;
+    text-decoration: none;
+    font-size: 1.8rem;
+}
+
+    a.category-filter-name:hover,
+    a.cost-filter-name:hover {
+        opacity: 0.8;
+        color: var(--main-color);
+    }
+
+    a.category-filter-name.active, a.cost-filter-name.active {
+        color: var(--main-color);
+        font-weight: 500;
+    }
+
+/* search and sort box */
+.menu-sort {
+    transform: translateX(-2%);
+    width: 50%;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+
+.menu-sort-box {
+    width: 50%;
+    height: 36px;
+    font-weight: 400;
+    font-size: 1.6rem;
+    border: 2px solid #c6c6c6;
+    background-color: transparent;
+    border-radius: 6px;
+    padding: 0 10px;
+    outline: none;
+    opacity: 0.7;
+    margin-left: 10px;
+}
+
+.menu-search-box {
+    width: 40%;
+    height: 36px;
+    background-color: transparent;
+    border: 2px solid #c6c6c6;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    font-size: 1.6rem;
+}
+
+.search-box-input {
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    padding-left: 10px;
+    color: var(--text-color);
+}
+
+    .search-box-input::placeholder {
+        font-size: 1.6rem;
+        line-height: 100%;
+        font-weight: 400;
+        transform: translateY(-10%);
+    }
+
+.search-box-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25%;
+    height: 102%;
+    border: none;
+    color: var(--text-color);
+    background-color: #C0C0C0;
+}
+
+    .search-box-btn:hover {
+        opacity: 0.6;
+    }
+
+    .search-box-btn:focus,
+    .search-box-btn:focus-visible {
+        outline: none;
+    }
+
+/*Danger message*/
+.alert.alert-danger {
+    padding: 10px;
+    text-align: center;
+}
+/* menu-item */
+
+.card-edit {
+    width: 31%;
+    height: 360px;
+    margin: 0 1% 30px 1%;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,.5);
+    border-radius: 6px;
+    position: relative;
+}
+
+.card-img-edit {
+    width: 100%;
+    height: fit-content;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.card-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-tittle {
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: var(--main-color);
+    width: 70%;
+}
+
+    .card-tittle:hover {
+        text-decoration: none;
+        color: var(--main-color);
+        opacity: 0.7;
+    }
+
+.card-sub {
+    width: 30%;
+    color: var(--text-color);
+}
+
+.card-btn {
+    position: absolute;
+    width: 90%;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Paging */
+.page-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.pagination a {
+    display: block;
+    color: var(--text-color);
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    font-size: 1.4rem;
+    border-radius: 6px;
+}
+
+    .pagination a.active {
+        background-color: var(--main-color);
+        color: white;
+    }
+
+.pagination i {
+    color: var(--main-color);
+}
+
+.pagination a:hover:not(.active) {
+    background-color: var(--main-color);
+    opacity: 0.6;
+}
+
+i.fas.fa-cart-shopping {
+    margin-right: 10px;
+}
+/*alert-successful*/
+.alert.alert-dismissible.alert-menu-edit {
+    z-index: 2;
+    right: 15px;
+    left: 35%;
+    top: 65px;
+    bottom: unset;
+    position: absolute;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+.alert i[class="fa-circle-xmark"] {
+    font-size: 1.5em;
+    line-height: 1;
+    margin-right: 10px;
+}
+/*rating*/
+.card-body .rating-infor {
+    position: absolute;
+    bottom: 15%;
+}
+
+.stars-outer.stars-outer-menu {
+    margin: 0;
+    font-size: 20px;
+}
+
+.card-body .rating-infor .numbersof-rating {
+    margin-left: 5px;
+    font-size: 1.6rem;
+}

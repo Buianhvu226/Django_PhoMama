@@ -1,0 +1,143 @@
+﻿.payment {
+    margin-top: 40px;
+    margin-bottom: 50px;
+    font-size: 1.8rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.body__payment {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 1px 0px 23px 1px rgb(0, 0, 0, 0.4);
+    height: fit-content;
+}
+
+.receiver {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.receiver p {
+    font-weight: 500;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.list-receiver-item {
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.list-receiver-item small {
+    color: #e74c3c;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 16px;
+}
+
+.receiver-item-input {
+    font-size: 1.6rem;
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #c6c6c6;
+    border-radius: 3px;
+    outline: none;
+}
+
+.receiver-item label {
+    opacity: 0.8;
+}
+
+.receiver-item input {
+    padding-left: 15px;
+}
+
+.receiver-item select {
+    padding-left: 15px;
+}
+
+.payment__book {
+    box-shadow: 1px 0px 9px 1px var(--main-color);
+    border-radius: 6px;
+    margin-left: 30px;
+    width: 30%;
+    height: fit-content;
+}
+
+.list-payment {
+    margin: 30px auto;
+    width: 90%;
+    display: flex;
+    flex-flow: column;
+}
+.payment-item {
+    margin-bottom: 20px;
+}
+
+.payment-item-infor {
+    display: flex;
+}
+
+    .payment-item-infor img {
+        width: 80px;
+        height: 80px;
+        margin-right: 15px;
+    }
+
+    .payment-item-infor p {
+        text-transform: capitalize;
+        font-weight: 500;
+    }
+
+.payment-item-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.payment-item-detail span {
+    font-size: 1.6rem;
+}
+
+.list-fee-detail {
+    border-top: 1px solid #c6c6c6;
+    border-bottom: 1px solid #c6c6c6;
+    padding: 5px 0;
+    margin: 20px 0;
+}
+
+.fee-detail-item__payment {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.fee-detail__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+}
+.submit-btn__payment {
+    margin-top: 20px;
+    width: 90%;
+    align-self: center;
+}
+
+.home-link__payment {
+    width: calc(50% - 10px);
+    height: 40px;
+    margin-top: 10px;
+}
+
+
+/* Phone number validate*/
+.error {
+    color: red;
+    font-size: 1.6rem;
+}
+
+.hidden {
+    display: none
+}

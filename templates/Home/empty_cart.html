@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="breadcrumb-division">
+    <ol class="breadcrumb breadcrumb__edit">
+    </ol>
+</div>
+
+<div class="empty-cart">
+    <img src="/static/asset/images/empty-cart.png" alt="Giỏ hàng trống">
+    <button class="home-link home-link__emptycart" onclick="window.location.href = '{% url 'home:menu' %}';">
+        <i class="fa-solid fa-chevron-left"></i>
+        Tiếp tục mua sắm
+    </button>
+</div>
+{% endblock content %}

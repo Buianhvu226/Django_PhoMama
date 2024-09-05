@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .submit-btn {
+        display: inline-block;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        clear: both;
+    }
+
+    .card-body {
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .card-btn {
+        position: relative;
+        z-index: 1;
+    }
+
+    .card-edit {
+        margin-bottom: 20px;
+        padding: 0px;
+    }
+</style>
+
+<div class="breadcrumb-division">
+    <ol class="breadcrumb breadcrumb__edit">
+        {% comment %} <li class="breadcrumb-item"><a href="{% url 'home:index' %}">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Thực đơn</li> {% endcomment %}
+    </ol>
+</div>
+<div class="row jtf-center menu">
+    <div class="col-3">
+        <form class="filter-menu">
+            <p>Danh mục sản phẩm</p>
+            <a href="{% url 'home:menu' %}" class="category-filter-name" id="cate-all">Tất cả</a>
+            <div class="categories-list">
+                {% for category in categories %}
+                    <a href="{% url 'home:menu' %}?CategoryID={{ category.CategoryID }}&priceRange={{ priceRange|default_if_none:'' }}&sortBy={{ sortBy|default_if_none:'' }}&searchText={{ searchText|default_if_none:'' }}" class="category-filter-name" id="cate-{{ category.CategoryID }}">
+                        {{ category.CategoryName }}
+                    </a>
+                    <br />
+                {% endfor %}
+            </div>
+        </form>
+        
+        <form class="filter-menu">
+            <p>Mức giá</p>
+            <a href="{% url 'home:menu' %}?CategoryID={{ categoryID|default_if_none:'' }}&sortBy={{ sortBy|default_if_none:'' }}&searchText={{ searchText|default_if_none:'' }}" class="cost-filter-name" id="price-all">Tất cả</a>
+            <a href="{% url 'home:menu' %}?CategoryID={{ categoryID|default_if_none:'' }}&priceRange=0-20000&sortBy={{ sortBy|default_if_none:'' }}&searchText={{ searchText|default_if_none:'' }}" class="cost-filter-name" id="price-1">Từ 0 - 20,000đ</a>
+            <a href="{% url 'home:menu' %}?CategoryID={{ categoryID|default_if_none:'' }}&priceRange=20000-50000&sortBy={{ sortBy|default_if_none:'' }}&searchText={{ searchText|default_if_none:'' }}" class="cost-filter-name" id="price-2">Từ 20,000 - 50,000đ</a>
+            <a href="{% url 'home:menu' %}?CategoryID={{ categoryID|default_if_none:'' }}&priceRange=50000-70000&sortBy={{ sortBy|default_if_none:'' }}&searchText={{ searchText|default_if_none:'' }}" class="cost-filter-name" id="price-3">Từ 50,000 - 70,000đ</a>
+            <a href="{% url 'home:menu' %}?CategoryID={{ categoryID|default_if_none:'' }}&priceRange=70000-100000&sortBy={{ sortBy|default_if_none:'' }}&searchText={{ searchText|default_if_none:'' }}" class="cost-filter-name" id="price-4">Từ 70,000 - 100,000đ</a>
+        </form>
+    </div>
+    <div class="col-9">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <form class="menu-sort" method="get">
+                <label class="">Sắp xếp theo: </label>
+                <select name="sortBy" class="menu-sort-box">
+                    <option value="all">Sắp xếp</option>
+                    <option value="price-asc" {% if sortBy == 'price-asc' %}selected{% endif %}>Tăng theo giá</option>
+                    <option value="price-desc" {% if sortBy == 'price-desc' %}selected{% endif %}>Giảm theo giá</option>
+                    <option value="name-asc" {% if sortBy == 'name-asc' %}selected{% endif %}>Tăng theo tên</option>
+                    <option value="name-desc" {% if sortBy == 'name-desc' %}selected{% endif %}>Giảm theo tên</option>
+                </select>
+                <input name="categoryID" value="{{ categoryID|default_if_none:'' }}" type="hidden" />
+                <input name="priceRange" value="{{ priceRange|default_if_none:'' }}" type="hidden" />
+                <input name="searchText" value="{{ searchText|default_if_none:'' }}" type="hidden" />
+                <input type="submit" style="visibility: hidden; width:0" />
+            </form>
+            <form class="menu-search-box" method="get">
+                <input class="search-box-input" style="width: 1300px" type="text" name="searchText" placeholder="Nhập món ăn cần tìm" value="{{ searchText|default_if_none:'' }}">
+                <input class="search-box-hidden" name="categoryID" value="{{ categoryID|default_if_none:'' }}" type="hidden" />
+                <input class="search-box-hidden" name="priceRange" value="{{ priceRange|default_if_none:'' }}" type="hidden" />
+                <input class="search-box-hidden" name="sortBy" value="{{ sortBy|default_if_none:'' }}" type="hidden" />
+                <button type="submit" class="search-box-btn">
+                    <i class="fas fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+        {% if message %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ message }}</strong>
+        </div>
+        {% endif %}
+        <div class="alert alert-success alert-menu-edit alert-dismissible d-flex align-items-center fade">
+            <i class="bi-check-circle-fill"></i>
+            <strong class="mx-1 mr-4">Thành công!</strong> Đã thêm sản phẩm vào giỏ hàng!
+            <button type="button" class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="alert alert-danger alert-menu-edit alert-dismissible d-flex align-items-center fade">
+            <i class="fa-solid fa-circle-xmark" style="color: red"></i>
+            <strong class="mx-1 mr-4">Thất bại!</strong>
+            <span></span>
+            <button type="button" class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="card-deck list-card-item d-flex flex-wrap" style="margin: 90px">
+            {% for food in foods %}
+            <div class="card-edit"style="width: 320px">
+                <a href="{% url 'home:detail_food' food_id=food.FoodID %}">
+                    <img class="card-img-top card-img-edit" src="{{ food.ImageFood }}" alt="ảnh" style="width: 320px; height: 260px; object-fit: cover;" />
+
+                </a>
+                <div class="card-body"style="width: 320px">
+                    <div class="card-detail">
+                        <a href="{% url 'home:detail_food' food_id=food.FoodID %}" class="card-title">{{ food.FoodName }}</a>
+                        <p class="card-sub">{{ food.Price|floatformat:"0" }}đ</p>
+                    </div>
+                    <div class="rating-infor d-flex">
+                        <div class="stars-outer stars-outer-menu">
+                            <div class="stars-inner stars-inner-menu" style="width:{{ food.TotalRating|default_if_none:0 }}%"></div>
+                        </div>
+                        <span class="numbersof-rating">({{ food.TotalRating|default_if_none:0 }})</span>
+                    </div>
+                    {% if food.Quantity != 0 %}
+                    <form method="post" action="{% url 'home:cart_add' %}" >
+                        {% csrf_token %}
+                        <input type="hidden" name="food_id" value="{{ food.FoodID }}">
+                        <input type="hidden" name="user_id" value="{{ request.session.user_id }}">
+                        <button type="submit" class="submit-btn card-btn add-btn" >
+                            <i class="fas fa-cart-shopping"></i> Thêm vào giỏ hàng
+                        </button>
+                    </form>
+                    {% else %}
+                    <button class="submit-btn card-btn grey-btn">
+                        <i class="fas fa-cart-shopping"></i> Hết hàng
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>        
+        {% include '_paging.html' %}
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var sortSelect = document.querySelector('.menu-sort-box');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function() {
+                // Get the selected value from the dropdown
+                var sortByValue = this.value;
+                
+                // Construct the new URL with the updated sorting parameter
+                var url = new URL(window.location.href);
+                url.searchParams.set('sortBy', sortByValue);
+                
+                // Redirect the page to the new URL
+                window.location.href = url.toString();
+            });
+        }
+    });
+	var alertElement = document.querySelectorAll(".alert-dismissible");
+	var hideTimeout = null;
+
+	function hideAlert() {
+		alertElement[0].classList.remove('show');
+		alertElement[1].classList.remove('show');
+	}
+
+	function showAlert() {
+		if (hideTimeout) {
+			clearTimeout(hideTimeout);
+		}
+		hideTimeout = setTimeout(hideAlert, 2000);
+	}
+    
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block content %}
+<div class="">
+    <div class="banner">
+        <img src="/static/asset/images/Banner.jfif" alt="Ảnh banner" class="bnner-style">
+    </div>
+    <div class="categoryView">
+        <div class="category-text">
+            <span class="sp sp-spc">Chọn </span><span class="sp">Danh mục</span>
+        </div>
+        <img src="/static/asset/images/Buger-Flavar.png" alt="Ảnh Burger" class="img-size">
+        <img src="/static/asset/images/3-Fried-Chicken.jpg" alt="Ảnh Fried Chicken" class="img-size">
+        <img src="/static/asset/images/4-eggtart.jpg" alt="Ảnh Eggtart" class="img-size">
+        <img src="/static/asset/images/Lipton.jpg" alt="Ảnh Lipton" class="img-size">
+        <a href="{% url 'home:menu' %}?CategoryID=1" class="button" id="cate-1">BÁNH MỲ</a>
+        <a href="{% url 'home:menu' %}?CategoryID=2" class="button" id="cate-2">ĐỒ CHIÊN</a>
+        <a href="{% url 'home:menu' %}?CategoryID=3" class="button" id="cate-3">BÁNH NGỌT</a>
+        <a href="{% url 'home:menu' %}?CategoryID=4" class="button" id="cate-4">THỨC UỐNG</a>
+    </div>
+    <div class="introduce">
+        <div class="introduce-text">
+            <span class="sp sp-spc">Về </span><span class="sp">Chúng tôi</span>
+        </div>
+        
+        <div class="row">
+            <div class="introduce-list-item col-5">
+                <h3 class="introduce-content-line1">Cửa hàng chúng tôi</h3>
+                <h3 class="introduce-content-line2">đưa đến cho khách hàng trải nghiệm tốt nhất</h3>
+                <br>
+
+   
+                <p class="introduce-decription">Chúng tôi cam kết mang đến những trải nghiệm ẩm thực tuyệt vời với từng món ăn, nhằm lan tỏa niềm vui và sự hài lòng đến tất cả mọi người.</p>
+                <br>
+                <br>
+                <br>
+                <div class="introduce-list">
+                    <span><i class="fa-solid fa-check"></i> Thức ăn ngon</span><br>
+
+                    <span><i class="fa-solid fa-check"></i> Đạt chất lượng và vệ sinh</span><br>
+
+                    <span><i class="fa-solid fa-check"></i> Phục vụ tận tình</span>
+                </div>
+            </div>
+            <div class="introduce-list-item col-7">
+                <img src="/static/asset/images/Trung.png" alt="Ảnh EggBread" class="eggbread-img">
+                {% comment %} <div class="row introduce-img-row">
+                    <img src="/static/asset/images/Bread.png" alt="Ảnh Bread" class="bread col-6">
+                    <img src="/static/asset/images/BanhKep.png" alt="Ảnh BurgerBread" class="burger-bread-img col-6">
+                </div> {% endcomment %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

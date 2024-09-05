@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+{% block content %}
+
+<div class="breadcrumb-division">
+    <ol class="breadcrumb breadcrumb__edit">
+        {% comment %} <li class="breadcrumb-item"><a href="{% url 'home:index' %}">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Thực đơn</li> {% endcomment %}
+    </ol>
+</div>
+
+{% if not carts %}
+<div class="empty-cart">
+    <img src="/static/asset/images/empty-cart.png" alt="Giỏ hàng trống">
+    <button class="home-link home-link__emptycart" onclick="window.location.href = '{% url 'home:menu' %}';">
+        <i class="fa-solid fa-chevron-left"></i>
+        Tiếp tục mua sắm
+    </button>
+</div>
+{% else %}
+
+<div class="list-item cart">
+    <table class="table text-center">
+        <thead style="background-color: var(--div-color)">
+            <tr class="table-header">
+                <th class="cart__table-col col-1" scope="col">STT</th>
+                <th class="cart__table-col col-4" scope="col">Sản phẩm</th>
+                <th class="cart__table-col col-2" scope="col">Đơn giá</th>
+                <th class="cart__table-col col-2" scope="col">Số lượng</th>
+                <th class="cart__table-col col-2" scope="col">Thành tiền</th>
+                <th class="cart__table-col col-1" scope="col">Xoá</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in carts %}
+            <tr>
+                <th scope="row" style="font-weight: 500;">{{ forloop.counter }}</th>
+                <td class="d-flex align-items-center">
+                    <img src="{{ i.Food.ImageFood }}" alt="Ảnh món ăn" class="cart__item-image" />
+                    <a href="#" class="cart__name-item">{{ i.Food.FoodName }}</a>
+                </td>
+                <td>{{ i.Food.Price }}đ</td>
+                <td>
+                    <form class="input-group" id="cart-form-{{ i.id }}" method="post" onsubmit="updateCart({{ i.id }})">
+                        {% csrf_token %}
+                        <div class="minus minus-plus-button" onclick="decrementQuantity({{ i.id }})">-</div>
+                        <input type="text" value="{{ i.Quantity }}" class="input-field" id="quantity-{{ i.id }}"
+                               onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 8" name="quantity">
+                        <div class="plus minus-plus-button" onclick="incrementQuantity({{ i.id }})">+</div>
+                        <input type="hidden" value="{{ i.FoodID }}" name="food_id" />
+                        <input type="hidden" value="{{ i.Quantity }}" name="Quantity" />
+                        <input type="submit" style="width: 0; height: 0; display: none" />
+                    </form>                  
+                    <span class="error-message" style="color: red"></span>
+                </td>
+                <td>{{ i.total_price }}đ</td>
+                <td>
+                    <form method="post" action="{% url 'home:delete_cart'%}">
+                        <input type="hidden" name="food_id" value="{{ i.Food_id }}">
+                        <input type="hidden" name="user_id" value="{{ request.session.user_id }}">
+                        {% csrf_token %}
+                        <button type="submit" class="icon-btn">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>                
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="row d-flex justify-content-end cart">
+	<div class="fee-division col-5">
+		<span class="fee-detail__item">Tổng đơn</span>
+		<div class="total-fee-list">
+				<div class="fee-detail">
+					<div class="fee-detail__item">  
+                        <span>Tổng tiền hàng</span><span>{{ totalMoney }}đ</span>
+                    </div>
+                    <div class="fee-detail__item">
+                        <span>Thuế</span><span>3%</span>
+                    </div>
+                </div>
+                <div class="fee-detail">
+                    <div class="fee-detail__item" style="font-weight: 500;">
+                        <span>Tổng thanh toán</span><span>{{ totalPayment }}đ</span>
+                    </div>
+                </div>
+        </div>
+        <form id="payment-form" method="post" action="{% url 'home:payment' %}">
+            {% csrf_token %}
+            <input type="hidden" name="total_money" id="total_money" value="{{ totalMoney }}">
+            <button type="submit" class="submit-btn">Mua Hàng</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'js/cart.js' %}"></script>
+<script>
+    function updateCart(itemId) {
+        var form = document.getElementById('cart-form-' + itemId);
+        var formData = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update total price and total payment on the interface
+            document.getElementById('totalMoney').innerText = data.totalMoney + 'đ';
+            document.getElementById('totalPayment').innerText = data.totalPayment + 'đ';
+    
+            // Update the total price for each item in the cart
+            var itemTotalPrice = document.getElementById('itemTotalPrice-' + itemId);
+            itemTotalPrice.innerText = data.itemTotalPrice + 'đ';  // assuming your server returns itemTotalPrice
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function incrementQuantity(itemId) {
+        var quantityInput = document.getElementById('quantity-' + itemId);
+        var currentQuantity = Number(quantityInput.value);
+        quantityInput.value = currentQuantity + 1;
+        updateCart(itemId);  // assuming updateCart is defined and does what you want
+    }
+    
+    function decrementQuantity(itemId) {
+        var quantityInput = document.getElementById('quantity-' + itemId);
+        var currentQuantity = Number(quantityInput.value);
+        if (currentQuantity > 1) {  // prevent quantity from going below 1
+            quantityInput.value = currentQuantity - 1;
+            updateCart(itemId);  // assuming updateCart is defined and does what you want
+        }
+    }
+</script>
+{% endblock %}

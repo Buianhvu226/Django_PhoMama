@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+{% block content %}
+
+<div class="breadcrumb-division">
+    <ol class="breadcrumb breadcrumb__edit">
+        {% comment %} <li class="breadcrumb-item"><a href="{% url 'home:index' %}">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Thực đơn</li> {% endcomment %}
+    </ol>
+</div>
+
+<form class="row container payment jtf-center pr-0 pl-0" method="post" action="{% url 'home:order_detail' %}">
+    {% csrf_token %}
+    <div class="col-8 body__payment">
+        <div class="receiver">
+            <p>Địa chỉ giao hàng</p>
+            <div class="list-receiver-item">
+                <div class="receiver-item">
+                    <label>Tên người nhận <span style="color: red">&lowast;</span></label><br>
+                    <input class="receiver-item-input" type="text" name="Name" required id="receiverName">
+                    <small id="name-error" style="color: red"></small>
+                </div>
+            </div>
+            <div class="list-receiver-item justify-content-between">
+                <div class="receiver-item">
+                    <label>Số điện thoại <span style="color: red">&lowast;</span></label>
+                    <input class="receiver-item-input" type="text" id="phone_number" required name="PhoneNumber">
+                    <small id="phone-error" style="color: red"></small>
+                </div>
+            </div>
+            <div class="row list-receiver-item d-flex">
+                <div class="receiver-item col" style="padding-right: 5px">
+                    <label>Tỉnh (Thành phố) <span style="color: red">&lowast;</span></label><br>
+                    <input class="receiver-item-input" value="Đà Nẵng" readonly>
+                </div>
+                <div class="receiver-item col" style="padding-left: 5px">
+                    <label>Quận (Huyện) <span style="color: red">&lowast;</span></label><br>
+                    <select class="receiver-item-input" name="combobox_Item_District" id="district">
+                        {% for district in list_districts %}
+                            <option value="{{ district.DistrictID }}">{{ district.DistrictName }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+			<div class="row list-receiver-item d-flex">
+				<div class="receiver-item col" style="padding-left: 5px">
+                    <label>Phường (Xã) <span style="color: red">&lowast;</span></label><br>
+                    <select class="receiver-item-input" name="combobox_Item_Ward" id="ward">
+                        {% for ward in list_wards %}
+                        <option value="{{ ward.WardId }}">{{ ward.WardName }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="receiver-item col" style="padding-left: 5px">
+                    <label>Số nhà <span style="color: red">&lowast;</span></label><br>
+                    <input class="receiver-item-input" type="text" name="HouseNumber" required>
+                    <small id="housenumber-error" style="color: red; margin-left: 2%"></small>
+                </div>
+            </div>
+            <div class="list-receiver-item">
+                <div class="receiver-item note-edit">
+                    <label>Ghi chú</label><br>
+                    <input class="receiver-item-input" type="text" name="Note">
+                </div>
+            </div>
+
+            <button class="home-link home-link__payment" onclick="window.location.href = '{% url 'home:menu' %}';" type="button">
+                <i class="fa-solid fa-chevron-left"></i>
+                Trở về mua sắm
+            </button>
+        </div>
+    </div>
+
+    <div class="d-flex payment__book">
+        <div class="list-payment">
+            <div class="list-payment-item">
+                {% for i in carts %}
+                <div class="payment-item">
+                    <div class="payment-item-infor">
+                        <div class="payment-item-detail">
+                            <p>{{ i.Name }}</p>
+                            <div>
+                                {% comment %} <span>{{ i.Price|intcomma }}đ</span> {% endcomment %}
+                                <span>đ</span>
+                                <span style="opacity: 0.6;">x{{ i.Quantity }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="list-fee-detail">
+                <div class="fee-detail__item fee-detail-item__payment">
+                    <span>Tạm tính</span>
+                    <span>{{ temp_money }}đ</span>
+                </div>
+                <div class="fee-detail__item fee-detail-item__payment">
+                    <span>Phí vận chuyển</span><span id="ship">15500.0đ</span>
+                </div>
+                <div class="fee-detail__item fee-detail-item__payment">
+                    <span>Thuế (3%)</span>
+                    <span>{{sale_money}}đ</span>
+                </div>
+            </div>
+            <div class="fee-detail__item total-fee fee-detail-item__payment" style="font-weight: 500;">
+                <span>Tổng thanh toán</span>
+                <span id="total">{{ sum_money}}đ</span>
+            </div>
+            <input type="hidden" value="{{ tempMoney }}" name="tempMoney" />
+            <input type="hidden" value="{{ shippingMoney }}" name="shippingMoney" />
+            <input type="hidden" id="totalhidden" name="totalhidden" value="" />
+            <div id="successMessage" style="display:none">{{ successMessage }}</div>
+            <div id="errorMessage" style="display:none">{{ errorMessage }}</div>
+            <button type="submit" class="submit-btn submit-btn__payment">
+    Đặt Hàng
+    <i class="fa-solid fa-shopping-cart" style="margin-left: 10px; vertical-align: middle;"></i>
+</button>
+        </div>
+    </div>
+</form>
+<script src="{% static 'js/payment.js' %}"></script>
+<script src="{% static 'lib/jquery/dist/jquery.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{% comment %} <script>
+    $('#district').change(function() {
+        var districtID = $(this).val();  // Lấy ID của Quận/Huyện đã chọn
+        console.log(districtID);
+        if (districtID) {
+            $.get("/get-wards/" + districtID)       // Thực hiện GET request đến Django view
+                .done(function(data) {
+                    $('#ward').empty(); // Xóa các lựa chọn hiện tại của Phường/Xã
+                    // Thêm lựa chọn mới vào select của Phường/Xã
+                    data.forEach(function(ward) {
+                        $('#ward').append($('<option></option>').val(ward.WardId).html(ward.WardName));
+                    });
+                });
+        } else {
+            $('#ward').empty(); // Nếu không có Quận/Huyện nào được chọn, xóa Phường/Xã
+        }
+    });
+</script> {% endcomment %}
+{% comment %} <script>
+    let timeoutId;
+    function debounce(func, delay) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(func, delay);
+    }
+    async function calculateShippingFee(event) {
+        debounce(() => calculateShippingFee(event), 500);
+        const response = await fetch(`https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee?from_district_id=${document.getElementsByName("fromDistrictId")[0].value}&service_id=${document.getElementsByName("serviceId")[0].value}&to_district_id=${document.getElementsByName("toDistrictId")[0].value}&to_ward_code=${document.getElementsByName("toWardCode")[0].value}&height=${document.getElementsByName("height")[0].value}&length=${document.getElementsByName("length")[0].value}&weight=${document.getElementsByName("weight")[0].value}&width=${document.getElementsByName("width")[0].value}&insurance_value=${document.getElementsByName("insuranceValue")[0].value}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "token": "312f0089-ed7a-11ed-8a8c-6e4795e6d902"
+            }
+        });
+        const data = await response.json();
+        const ship = document.getElementById("ship");
+        const total = document.getElementById("total");
+        const totalData = document.getElementById("totalhidden");
+        if (response.ok) {
+            ship.innerText = data.data.total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            total.innerText = (parseInt(total.getAttribute("value")) + data.data.total).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            totalData.value = total.innerText;
+            const successMessage = document.getElementById("successMessage");
+            successMessage.innerText = `Success! Response status code: ${response.status}`;
+        } else {
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.innerText = `Error! ${data.message}`;
+        }
+    }
+    calculateShippingFee(event);
+    </script>
+    <script>
+        const districtDropdown = document.getElementById("district");
+        const toDistrictInput = document.querySelector("input[name=toDistrictId]");
+        let districtName = "";
+
+        async function getDistrictId() {
+            // Lấy DistrictName được chọn
+            districtName = districtDropdown.value;
+            const response = await fetch(`https://online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id=203`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "token": "312f0089-ed7a-11ed-8a8c-6e4795e6d902"
+                }
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                // Tìm kiếm DistrictID tương ứng với DistrictName được chọn
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].DistrictName.includes(districtName)) {
+                        toDistrictInput.value = data.data[i].DistrictID;
+                        return; // Thoát khỏi hàm nếu đã tìm thấy
+                    }
+                }
+                // Nếu không tìm thấy thì gán giá trị đầu tiên
+                if (data.data.length > 0) {
+                    toDistrictInput.value = data.data[0].DistrictID;
+                }
+            } else {
+                const errorMessage = document.getElementById("errorMessage");
+                errorMessage.innerText = `Error! ${data.message}`;
+            }
+        }
+
+        // Gọi hàm khi trang được tải lần đầu
+        getDistrictId();
+
+        // Thêm sự kiện onchange cho dropdown
+        districtDropdown.addEventListener("change", getDistrictId);
+    </script>
+    <script>
+        const wardDropdown = document.getElementById("ward");
+        const toWardInput = document.querySelector("input[name=toWardCode]");
+        let wardName = "";
+        // Get the selected ward name
+
+        async function getDefaultCode(){
+            // Get the selected ward name
+            const selectedOption = wardDropdown.options[wardDropdown.selectedIndex];
+
+            try {
+                // Fetch the ward data using the district ID
+                const response = await fetch(
+                    `https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=1526`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            token: "312f0089-ed7a-11ed-8a8c-6e4795e6d902",
+                        },
+                    }
+                );
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Search for the ward code corresponding to the selected ward name
+                    toWardInput.value = data.data[10].WardCode;
+                } else {
+                    const errorMessage = document.getElementById("errorMessage");
+                    errorMessage.innerText = `Error! ${data.message}`;
+                }
+            } catch (error) {
+                const errorMessage = document.getElementById("errorMessage");
+                errorMessage.innerText = `Error! ${error.message}`;
+            }
+
+            async function getWardCode(){
+                try { 
+                    const selectedOption = wardDropdown.options[wardDropdown.selectedIndex];
+                    wardName = selectedOption.textContent;
+                    // Fetch the ward data using the district ID
+                    const response = await fetch(
+                        `https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=${document.getElementsByName("toDistrictId")[0].value}`,
+                        {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                token: "312f0089-ed7a-11ed-8a8c-6e4795e6d902",
+                            },
+                        }
+                    );
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        // Search for the ward code corresponding to the selected ward name
+                        for (let i = 0; i < data.data.length; i++) {
+                            if (data.data[i].WardName.includes(wardName)) {
+                                toWardInput.value = data.data[i].WardCode;
+                                return;
+                            }
+                        }
+                    } else {
+                        const errorMessage = document.getElementById("errorMessage");
+                        errorMessage.innerText = `Error! ${data.message}`;
+                    }
+                } catch (error) {
+                    const errorMessage = document.getElementById("errorMessage");
+                    errorMessage.innerText = `Error! ${error.message}`;
+
+                }
+            }
+
+            // Call the function once on page load
+            getDefaultCode();
+
+            // Add an onchange event listener to the ward dropdown
+            wardDropdown.addEventListener("change", getWardCode);
+        </script>
+        }
+
+        <script>
+            function captureReceiverName() {
+                var receiverName = document.getElementById("receiverName").value;
+                return receiverName;
+            }
+        </script>
+        <script>
+            $(document).ready(function () {
+                // Điền thông tin vào các thẻ input
+                $('#receiverName').val('{{ curCusPayment.CusName }}');
+                $('#phone_number').val('{{ curCusPayment.CusPhone }}');
+                var disId = {{ DId }};
+                var warId = {{ WId }};
+                $('select[name="combobox_Item_District"] option').filter(function () {
+                    return $(this).data('id_district') == disId;
+                }).prop('selected', true);
+                var wardSelect = document.getElementById("ward");
+
+                // Lặp qua các tùy chọn phường trong combobox phường và ẩn đi những tùy chọn không thuộc quận được chọn sẵn
+                for (var i = 0; i < wardSelect.options.length; i++) {
+                    if (wardSelect.options[i].getAttribute("data-district") == disId) {
+                        wardSelect.options[i].style.display = "block";
+                    } else {
+                        wardSelect.options[i].style.display = "none";
+                    }
+                }
+                $('select[name="WardId"] option').filter(function () {
+                    return $(this).data('ward') == warId;
+                }).prop('selected', true);
+                $('input[name="HouseNumber"]').val('{{ curCusPayment.HouseNumber }}');
+            });
+        </script>
+        <script>
+            function validateFilledName(){
+                var name = $("input[name='Name']").val();
+                if ($.trim(name) === "") return false;
+                return true;
+            }
+
+            function validateFilledPhone(){
+                var phone = $("input[name='PhoneNumber']").val();
+                if ($.trim(phone) === "") return false;
+                return true;
+            }
+
+            function checkValidate(){
+                var nameEle = $("input[name='Name']");
+                var phoneEle = $("#phone_number");
+                var housenumEle = $("input[name='HouseNumber']");
+
+                var nameValue = nameEle.val();
+                var phoneValue = phoneEle.val();
+                var housenumValue = housenumEle.val();
+
+                var isCheck = true;
+
+                if (!validateFilledName()){
+                    $('#name-error').text('* Vui lòng nhập họ tên!');
+                    isCheck = false;
+                } else if (!isName(nameValue)){
+                    $('#name-error').text('* Họ tên không đúng!');
+                    isCheck = false;
+                } else {
+                    $('#name-error').text('');
+                }
+
+                if (!validateFilledPhone()){
+                    $('#phone-error').text('* Vui lòng nhập số điện thoại!');
+                    isCheck = false;
+                } else if (!isPhone(phoneValue)){
+                    $('#phone-error').text('* Số điện thoại bị sai định dạng!');
+                    isCheck = false;
+                } else {
+                    $('#phone-error').text('');
+                }
+
+                if ($.trim(housenumValue) === ""){
+                    $('#housenumber-error').text('* Vui lòng nhập số nhà!');
+                    isCheck = false;
+                } else {
+                    $('#housenumber-error').text('');
+                }
+
+                return isCheck;
+            }
+
+            function validateForm(event){
+                var isValid = checkValidate();
+                if (isValid){
+                    $('.payment').submit();
+                } else {
+                    event.preventDefault();
+                }
+            }
+
+            $('.submit-btn__payment').click(validateForm);
+
+            function isName(name){
+                return /^([a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\s{1}[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$/.test(name.toLowerCase());
+            }
+
+            function isPhone(number){
+                return /^0[35789][0-9]{8}\b/.test(number);
+            }
+
+        </script>  {% endcomment %}
+{% endblock %}
+
+
+
+

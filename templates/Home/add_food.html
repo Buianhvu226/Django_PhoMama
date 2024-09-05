@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .submit-btn {
+        display: inline-block;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        clear: both;
+    }
+</style>
+
+<div class="breadcrumb-division">
+    <ol class="breadcrumb breadcrumb__edit">
+        <li class="breadcrumb-item"><a href="{% url 'home:index' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'home:admin_menu_management' %}">Admin Menu Management</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add New Food</li>
+    </ol>
+</div>
+<div class="row jtf-center">
+    <div class="col-12">
+        <h2>Add New Food</h2>
+        <!-- Form to add new food items -->
+        <form method="post" action="{% url 'home:add_food' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="foodName">Food Name</label>
+                <input type="text" class="form-control" id="foodName" name="foodName" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" name="category">
+                    {% for category in categories %}
+                        <option value="{{ category.CategoryID }}">{{ category.CategoryName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Food Image</label>
+                <input type="file" class="form-control-file" id="image" name="image" required>
+            </div>
+            <button type="submit" class="btn btn-primary submit-btn">Add Food</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
